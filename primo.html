@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primo - Math Service Learning Group</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary-blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --light-blue: #e8f0fe;
+            --accent-blue: #4285f4;
+            --white: #ffffff;
+            --gray: #f8f9fa;
+            --dark-gray: #5f6368;
+        }
+
+        body {
+            background-color: var(--gray);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-blue);
+        }
+
+        .cta-button {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-blue);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .secondary-button {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--light-blue);
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons a {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <header>
+            <div class="navbar">
+                <div class="logo">
+                    <img src="logo.png" alt="Primo Logo">
+                    <h1>Primo</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="#get-started" class="cta-button">Get Started</a>
+            </div>
+        </header>
+    
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Math Made Meaningful</h2>
+                <p>Empowering students through service, one equation at a time.</p>
+                <div class="hero-buttons">
+                    <a href="#features" class="cta-button">Explore Features</a>
+                    <a href="#contact" class="secondary-button">Join Us</a>
+                </div>
+            </div>
+        </section>
+    
+        <section id="features" class="features">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+                <p>At Primo, we make math fun, engaging, and accessible for all learners.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📘</div>
+                    <h3>Personal Tutoring</h3>
+                    <p>One-on-one sessions with passionate volunteers who love math.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Creative Curriculum</h3>
+                    <p>Games, puzzles, and projects that bring math concepts to life.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌎</div>
+                    <h3>Community Impact</h3>
+                    <p>We reach under-resourced communities with free math education.</p>
+                </div>
+            </div>
+        </section>
+        <section id="team" class="features">
+            <div class="section-title">
+                <h2>Meet the Team</h2>
+                <p>The passionate minds behind Primo.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" style="text-align: center;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto 1rem; border-radius: 50%; background-color: var(--light-blue); overflow: hidden;">
+                        <img src="founder1.jpg" alt="Founder 1" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>Alex Chen</h3>
+                    <p>Founder & Lead Tutor</p>
+                </div>
+                <div class="feature-card" style="text-align: center;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto 1rem; border-radius: 50%; background-color: var(--light-blue); overflow: hidden;">
+                        <img src="founder2.jpg" alt="Founder 2" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>Jamie Liu</h3>
+                    <p>Curriculum Director</p>
+                </div>
+                <div class="feature-card" style="text-align: center;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto 1rem; border-radius: 50%; background-color: var(--light-blue); overflow: hidden;">
+                        <img src="founder3.jpg" alt="Founder 3" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>Maya Patel</h3>
+                    <p>Community Outreach</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="testimonials" class="testimonials">
+            <div class="section-title">
+                <h2>What People Say</h2>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Primo helped me actually enjoy math for the first time!"</p>
+                    <p class="testimonial-author">— 7th Grade Student</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The volunteers are inspiring and really care about the kids."</p>
+                    <p class="testimonial-author">— Parent</p>
+                </div>
+            </div>
+        </section>
+    
+        <section id="get-started" class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Make a Difference?</h2>
+                <a href="#contact" class="cta-button">Join Primo Today</a>
+            </div>
+        </section>
+    
+        <footer>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Primo</h3>
+                    <ul>
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Worksheets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📸</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Primo. All rights reserved.
+            </div>
+        </footer>
+    </body>
+    
+</body>
+</html>
